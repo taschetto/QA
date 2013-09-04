@@ -32,7 +32,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'pg'
 gem 'devise'
+gem 'zurb-foundation'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
