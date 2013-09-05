@@ -3,27 +3,72 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-4 columns">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, :autocomplete => "off" %>
+    </div>
+    <div class="large-4 columns">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, :autocomplete => "off" %>
+    </div>
+    <div class="large-4 columns"></div>
+  </div>    
+
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :about %>
+      <%= f.text_field :about, :autocomplete => false %>
+    </div>
+  </div>  
+
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :birthday %>
+      <%= f.date_field :birthday, :autocomplete => false %>
+    </div>
+  </div>    
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div><%= f.label :password %> <i>(deixe em branco se não quiser mudar)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+  <div class="row">
+    <div class="large-4 columns">
+      <%= f.label :password %>
+      <%= f.password_field :password, :autocomplete => "off" %>
+    </div>
+    <div class="large-4 columns">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, :autocomplete => "off" %>
+    </div>
+    <div class="large-4 columns"></div>
+  </div>      
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :current_password %> <i>(necessário para confirmar)</i>
+      <%= f.password_field :current_password, :autocomplete => "off" %>
+    </div>
+  </div>
 
-  <div><%= f.label :current_password %> <i>(necessário para confirmar mudanças)</i><br />
-  <%= f.password_field :current_password %></div>
+  <div class="row">
+    <div class="large-4 columns">
+      <%= f.submit "Atualizar", class: "small button" %>
+    </div>
+  </div>
 
-  <div><%= f.submit "Atualizar", class: "small button" %></div>
 <% end %>
 
 <h3>Cancelar minha conta</h3>
 
-<p>Não gostou? <%= button_to "Cancelar minha conta", class: "small button", registration_path(resource_name), :data => { :confirm => "Tem certeza?" }, :method => :delete %></p>
+<p>Não gostou? <%= button_to "Cancelar minha conta", registration_path(resource_name), :data => { :confirm => "Tem certeza?" }, :method => :delete, class: "small button" %></p>
 
-<%= link_to "Voltar", :back %>
+<%= button_to "Voltar", :back, class: "small button" %>
