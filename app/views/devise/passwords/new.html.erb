@@ -6,7 +6,7 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email, :autofocus => true %></div>
 
-  <div><%= f.submit "Enviar informaçãoes de redefinição de senha" %></div>
+  <div><%= f.submit "Enviar informaçãoes de redefinição de senha", class: "small button" %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>

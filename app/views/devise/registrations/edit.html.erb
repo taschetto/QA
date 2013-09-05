@@ -19,11 +19,11 @@
   <div><%= f.label :current_password %> <i>(necessário para confirmar mudanças)</i><br />
   <%= f.password_field :current_password %></div>
 
-  <div><%= f.submit "Atualizar" %></div>
+  <div><%= f.submit "Atualizar", class: "small button" %></div>
 <% end %>
 
 <h3>Cancelar minha conta</h3>
 
-<p>Não gostou? <%= button_to "Cancelar minha conta", registration_path(resource_name), :data => { :confirm => "Tem certeza?" }, :method => :delete %></p>
+<p>Não gostou? <%= button_to "Cancelar minha conta", class: "small button", registration_path(resource_name), :data => { :confirm => "Tem certeza?" }, :method => :delete %></p>
 
 <%= link_to "Voltar", :back %>
