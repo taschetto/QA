@@ -538,7 +538,7 @@ $default-float: left;
 
 // We use these to set various text styles for breadcrumbs.
 
-// $crumb-font-size: emCalc(11);
+$crumb-font-size: emCalc(13);
 // $crumb-font-color: $primary-color;
 // $crumb-font-color-current: #333;
 // $crumb-font-color-unavailable: #999;
@@ -548,7 +548,7 @@ $default-float: left;
 // We use these to control the slash between breadcrumbs
 
 // $crumb-slash-color: #aaa;
-// $crumb-slash: "/";
+// $crumb-slash: ">";
 
 //
 // Clearing Variables
