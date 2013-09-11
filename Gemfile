@@ -35,6 +35,7 @@ end
 gem 'pg'
 gem 'devise'
 gem 'zurb-foundation'
+gem 'ancestry'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
