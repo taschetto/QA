@@ -8,22 +8,18 @@
   </ul>
 </div>
 
-<p id="notice"><%= notice %></p>
+<div class="large-12 columns">
+  <p><%= @category.description %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
+  <% if @category.has_children? %>
+  <div class="panel">
+    <ul class="inline-list">
+      <% @category.children.each do |category| %>
+        <li><%= link_to category.name, category %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @category.description %>
-</p>
-
-<p>
-  <strong>Ancestry:</strong>
-  <%= @category.ancestry %>
-</p>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<%= link_to 'Editar Categoria', edit_category_path(@category), class: "small button" %>
