@@ -22,14 +22,7 @@
       <div class="large-12 columns">
         <div class="nav-bar right">
          <ul class="button-group">
-            <li><%= link_to 'Home', "/", class: "button" %></li>
-            <% if user_signed_in? %>
-              <li><%= link_to 'Editar perfil', edit_user_registration_path, class: "button" %></li>
-              <li><%= link_to "Sair", destroy_user_session_path, method: :delete, class: "button" %></li>
-            <% else %>
-              <li><%= link_to "Entrar", new_user_session_path, class: "button" %></li>
-              <li><%= link_to "Criar conta", new_user_registration_path, class: "button" %></li>
-            <% end %>           
+            <%= render "layouts/links", className: "button" %>
           </ul>
         </div>
         <h1><%= link_to QA::Application.config.main_title, "/" %> <small><% if user_signed_in? %>Olá, <%= current_user.first_name %>!<% end %></small></h1>
@@ -55,12 +48,11 @@
       <!-- Sidebar -->
    
       <aside class="large-3 columns">
-        <h5>Categorias</h5>
+        <h5>Unidades Acadêmicas</h5>
         <ul class="side-nav">
-          <li><a href="#">Alpro I</a></li>
-          <li><a href="#">Alpro II</a></li>
-          <li><a href="#">Alpro III</a></li>
-          <li><a href="#">Gestão de Projetos de Software</a></li>
+          <% Category.where("ancestry = '1'").find_each do |category| %>
+            <li><%= link_to category.name, category %></li>
+          <% end %>
         </ul>
    
         <div class="panel">
@@ -87,9 +79,7 @@
           </div>
           <div class="large-6 columns">
             <ul class="inline-list right">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Meu Perfil</a></li>
-              <li><a href="#">Sobre</a></li>
+              <%= render "layouts/links", className: "" %>
             </ul>
           </div>
         </div>

@@ -1,0 +1,8 @@
+  <li><%= link_to 'Home', "/", class: className %></li>
+<% if user_signed_in? %>
+  <li><%= link_to 'Editar perfil', edit_user_registration_path, class: className %></li>
+  <li><%= link_to "Sair", destroy_user_session_path, method: :delete, class: className %></li>
+<% else %>
+  <li><%= link_to "Entrar", new_user_session_path, class: className %></li>
+  <li><%= link_to "Criar conta", new_user_registration_path, class: className %></li>
+<% end %>

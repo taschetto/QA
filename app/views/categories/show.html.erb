@@ -7,10 +7,8 @@
     <li class="current"><%= @category.name %></li>
   </ul>
 </div>
-
 <div class="large-12 columns">
   <p><%= @category.description %></p>
-
   <% if @category.has_children? %>
   <div class="panel">
     <ul class="inline-list">
@@ -21,5 +19,4 @@
   </div>
   <% end %>
 </div>
-
 <%= link_to 'Editar Categoria', edit_category_path(@category), class: "small button" %>
