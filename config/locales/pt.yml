@@ -1,1 +1,28 @@
 pt:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              invalid: "inválida."
+              blank: "vazia."
+              too_short: "comprimento inferior à 8 caracteres."
+            password:
+              invalid: "inválida."
+              blank: "vazia."
+              too_short: "comprimento inferior à 8 caracteres."
+            password_confirmation:
+              confirmation: "inválida."
+              invalid: "inválida."
+              blank: "vazia."
+              too_short: "comprimento inferior à 8 caracteres."
+  firstname: "Nome"
+  email: "E-mail"
+  lastname: "Sobrenome"
+  birthday: "Data de nascimento"
+  about: "Sobre mim"
+  current_password: "Senha atual"
+  password_confirmation: "Confirmação da senha"
+  password: "Senha"
+  user: "Usuário"

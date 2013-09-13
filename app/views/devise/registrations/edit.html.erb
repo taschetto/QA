@@ -6,29 +6,29 @@
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :email, "E-mail" %>
-      <%= f.email_field :email, :autofocus => true %>
+      <%= f.email_field :email, autofocus: false, disabled: true %>
     </div>
   </div>
 
   <div class="row">
     <div class="large-4 columns">
       <%= f.label :first_name, "Nome" %>
-      <%= f.text_field :first_name, :autocomplete => "off" %>
+      <%= f.text_field :first_name, autofocus: true, autocomplete: true %>
     </div>
     <div class="large-4 columns">
       <%= f.label :last_name, "Sobrenome" %>
-      <%= f.text_field :last_name, :autocomplete => "off" %>
+      <%= f.text_field :last_name, autocomplete: true %>
     </div>
     <div class="large-4 columns">
       <%= f.label :birthday, "Data de nascimento" %>
-      <%= f.date_field :birthday, :autocomplete => false %>
+      <%= f.date_field :birthday, autocomplete: true %>
     </div>
   </div>    
 
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :about, "Sobre mim" %>
-      <%= f.text_field :about, :autocomplete => false %>
+      <%= f.text_field :about, autocomplete: true %>
     </div>
   </div>  
 
@@ -39,11 +39,11 @@
   <div class="row">
     <div class="large-4 columns">
       <%= f.label :password, "Nova senha" %>
-      <%= f.password_field :password, :autocomplete => "off" %>
+      <%= f.password_field :password, autocomplete: false %>
     </div>
     <div class="large-4 columns">
       <%= f.label :password_confirmation, "Nova senha (confirmação)" %>
-      <%= f.password_field :password_confirmation, :autocomplete => "off" %>
+      <%= f.password_field :password_confirmation, autocomplete: false %>
     </div>
     <div class="large-4 columns"></div>
   </div>      
@@ -51,7 +51,7 @@
   <div class="row">
     <div class="large-12 columns">
       <%= f.label :current_password, "Senha atual (necessário para confirmar)" %>
-      <%= f.password_field :current_password, :autocomplete => "off" %>
+      <%= f.password_field :current_password, autocomplete: false %>
     </div>
   </div>
 
