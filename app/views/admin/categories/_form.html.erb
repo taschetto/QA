@@ -1,0 +1,26 @@
+<%= form_for([:admin, @category], html: { class: "custom" }) do |f| %>
+  <div class="row">
+    <div class="large-6 columns" role="content">
+      <%= f.label :name, "Categoria" %><br>
+      <%= f.text_field :name, autocomplete: true, autofocus: true %>
+    </div>
+    <div class="large-6 columns">
+      <%= f.label :parent_id, "Categoria Pai" %><br>
+      <%= f.collection_select :parent_id, Category.order(:name), :id, :name, include_blank: true %>
+    </div>
+  </div>
+
+  <div class="row">  
+    <div class="large-12 columns">
+      <%= f.label :description, "Descrição" %><br>
+      <%= f.text_area :description, autocomplete: true %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="large-12 columns">
+      <% btnLbl = controller.action_name == "new" ? "Inserir" : "Atualizar" %>
+      <%= f.submit btnLbl, class: "small button" %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,19 @@
+      <!-- Sidebar -->
+   
+      <aside class="large-3 columns">
+        <h5>Unidades Acadêmicas</h5>
+        <ul class="side-nav">
+          <% Category.where("ancestry = '1'").find_each do |category| %>
+            <li><%= link_to category.name, category %></li>
+          <% end %>
+        </ul>
+   
+        <div class="panel">
+          <h5>Você sabia...</h5>
+          <p>Que nós somos muito legais?</p>
+          <a href="#">Leia mais &rarr;</a>
+        </div>
+   
+      </aside>
+   
+      <!-- End Sidebar -->

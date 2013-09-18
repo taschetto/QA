@@ -1,6 +1,9 @@
   <li><%= link_to 'Home', "/", class: className %></li>
 <% if user_signed_in? %>
   <li><%= link_to 'Editar perfil', edit_user_registration_path, class: className %></li>
+  <% if current_user.user_type > 0 %>
+    <li><%= link_to "Painel", admin_dashboard_path, class: className %></li>
+  <% end %>
   <li><%= link_to "Sair", destroy_user_session_path, method: :delete, class: className %></li>
 <% else %>
   <li><%= link_to "Entrar", new_user_session_path, class: className %></li>
