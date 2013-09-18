@@ -34,7 +34,7 @@ end
 
 gem 'pg'
 gem 'devise'
-gem 'zurb-foundation', '~> 4.2.3'
+gem 'zurb-foundation'
 gem 'ancestry'
 
 # Use ActiveModel has_secure_password
