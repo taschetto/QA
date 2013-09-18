@@ -4,5 +4,6 @@ class AddCustomFieldsToUsers < ActiveRecord::Migration
     add_column :users, :last_name, :string
     add_column :users, :birthday, :datetime
     add_column :users, :about, :text
+    add_column :users, :type, :integer
   end
 end

@@ -1,4 +1,4 @@
-== Q&A PUCRS
+++ Q&A PUCRS
 
 Projeto para a disciplina de Gerência de Projetos de Software da Faculdade de Informática da PUCRS.
 

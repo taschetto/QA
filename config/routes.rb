@@ -1,8 +1,15 @@
 QA::Application.routes.draw do
-  resources :categories
-
+  get "admin/dashboard"
   devise_for :users
+  resources :categories, only: [:show]
+
   root :to => "home#index"
+
+  namespace :admin do
+    resources :categories
+  end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
