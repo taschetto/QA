@@ -17,7 +17,7 @@
 <% end %>
 <%
   if user_signed_in?
-      if current_user.user_type > 0 %>
+      if current_user.user_level > 0 %>
         <%= link_to 'Editar Categoria', edit_category_path(@category), class: "small button" %><%
       end
   end
