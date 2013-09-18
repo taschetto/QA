@@ -28,7 +28,7 @@ class Admin::CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'A categoria foi criada com sucesso.' }
+        format.html { redirect_to admin_category_path, notice: 'A categoria foi criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @category }
       else
         format.html { render action: 'new' }

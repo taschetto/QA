@@ -4,11 +4,11 @@
   <%= devise_error_messages! %>
 
   <div class="row">
-    <div class="large-12 columns">
+    <div class="large-8 columns">
       <%= f.label :email, "E-mail" %>
-      <%= f.email_field :email, autofocus: false, disabled: true %>
+      <%= f.text_field :email, autofocus: false, disabled: true %>
     </div>
-  </div>
+  </div>    
 
   <div class="row">
     <div class="large-4 columns">

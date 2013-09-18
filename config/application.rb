@@ -22,5 +22,6 @@ module QA
     config.i18n.default_locale = :pt
 
     config.main_title = "Q&A PUCRS"
+    config.email_postfix = "@acad.pucrs.br"
   end
 end

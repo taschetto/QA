@@ -4,6 +4,10 @@ pt:
       models:
         user:
           attributes:
+            email:
+              invalid: "inválido. Só são aceitos e-mails \"@acad.pucrs.br\"."
+              blank: "vazio."
+              taken: "já está em uso por outra conta."
             current_password:
               invalid: "inválida."
               blank: "vazia."
