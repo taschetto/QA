@@ -1,7 +1,7 @@
-++ Q&A PUCRS
+= Q&A PUCRS
 
-Projeto para a disciplina de Gerência de Projetos de Software da Faculdade de Informática da PUCRS.
+Este repositório armazena o Q&A PUCRS, um projeto experimental e de baixa complexidade. O Q&A serve/serviu como tema para o trabalho prático da disciplina de Gerência de Projetos de Software (Faculdade de Informática da PUCRS, semestre 2013/2).
 
-O Q&A é um sistema de perguntas e respostas onde alunos podem colaborar entre si.
+O Q&A PUCRS é um sistema de perguntas e respostas, onde alunos podem colaborar entre si.
 
 Uma versão funcional pode ser encontrada em http://qapucrs.herokuapps.com.
