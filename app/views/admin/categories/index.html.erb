@@ -1,3 +1,4 @@
+<%- title "Admin - Categorias" %>
 <h1>Categorias</h1>
 
 <table>
@@ -5,7 +6,8 @@
     <tr>
       <th>Nome</th>
       <th>Descrição</th>
-      <th>Ancestry</th>
+      <th>Ancestrais</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,9 +17,20 @@
   <tbody>
     <% @categories.each do |category| %>
       <tr>
-        <td><%= category.name %></td>
+        <td><%= link_to category.name, category %></td>
         <td><%= category.description %></td>
-        <td><%= category.ancestry %></td>
+        <td>
+        <%
+          if category.ancestors.any?
+            strAncestors = ""
+            category.ancestors.each do |category|
+              strAncestors += category.name + " / "
+            end
+          %>
+          <span data-tooltip class="has-tip" title="<%= strAncestors[0...-3] %>">ver</span>
+        <% end %>
+        </td>
+        <td><%= link_to "Filho", addchild_admin_category_path(category) %></td>
         <td><%= link_to 'Visualizar', category %></td>
         <td><%= link_to 'Editar', edit_admin_category_path(category) %></td>
         <td><%= link_to 'Apagar', admin_category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -28,4 +41,4 @@
 
 <br>
 
-<%= link_to 'Nova Categoria', new_admin_category_path %>
+<%= link_to 'Nova Categoria', new_admin_category_path, class: "small button" %>

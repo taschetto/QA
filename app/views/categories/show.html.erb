@@ -1,3 +1,5 @@
+<%- title "Categorias" %>
+
 <ul class="breadcrumbs">
   <li><%= link_to "Home", "/" %></li>
 <% @category.ancestors.each do |category| %>
@@ -5,6 +7,7 @@
 <% end %>
   <li class="current"><%= @category.name %></li>
 </ul>
+
 <p><%= @category.description %></p>
 <% if @category.has_children? %>
 <div class="panel">
@@ -15,10 +18,7 @@
   </ul>
 </div>
 <% end %>
-<%
-  if user_signed_in?
-      if current_user.user_level > 0 %>
-        <%= link_to 'Editar Categoria', edit_admin_category_path(@category), class: "small button" %><%
-      end
-  end
-%>
+
+<% if user_signed_in? && current_user.user_level > 0 %>
+  <%= link_to 'Editar Categoria', edit_admin_category_path(@category), class: "small button" %>
+<% end %>

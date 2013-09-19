@@ -6,7 +6,12 @@ QA::Application.routes.draw do
   root :to => "home#index"
 
   namespace :admin do
-    resources :categories
+    resources :categories do
+      member do
+        get 'addchild'
+        post 'addchild'
+      end
+    end
   end
 
 
