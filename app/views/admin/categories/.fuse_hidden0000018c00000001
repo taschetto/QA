@@ -1,0 +1,9 @@
+<%- title "Admin - Adicionar Filho: #{@category.name}" %>
+<div class="large-12 columns" role="content">
+  <h3>Adicionar Filho: <%= @category.name %></h3>
+  <div class="row">  
+    <div class="large-12 columns">
+      <%= @category.description %>
+    </div>
+  </div>
+</div>
