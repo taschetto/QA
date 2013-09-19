@@ -23,5 +23,6 @@ module QA
 
     config.main_title = "Q&A PUCRS"
     config.email_postfix = "@acad.pucrs.br"
+    config.main_category = "PUCRS"
   end
 end
