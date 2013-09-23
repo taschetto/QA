@@ -1,16 +1,21 @@
 <%- title "Admin - Categorias" %>
+<%
+  @pucrs = Category.where("name = '#{QA::Application.config.main_category}'").first
+  if @pucrs == nil
+    Category.create!(name: "#{QA::Application.config.main_category}", description: "Pontifícia Universidade Católica do Rio Grande do Sul")
+  end
+%>
 <h1>Categorias</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Nome</th>
-      <th>Descrição</th>
-      <th>Ancestrais</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th width="10%">Nome</th>
+      <th width="50%">Descrição</th>
+      <th width="10%"></th>
+      <th width="10%"></th>
+      <th width="10%"></th>
+      <th width="10%"></th>
     </tr>
   </thead>
 
@@ -18,22 +23,33 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= link_to category.name, category %></td>
-        <td><%= category.description %></td>
         <td>
         <%
+          strAncestors = ""
           if category.ancestors.any?
-            strAncestors = ""
+            
             category.ancestors.each do |category|
               strAncestors += category.name + " / "
             end
-          %>
-          <span data-tooltip class="has-tip" title="<%= strAncestors[0...-3] %>">ver</span>
-        <% end %>
+          end
+          if strAncestors != "" %>
+            <span data-tooltip class="has-tip" title="<%= strAncestors[0...-3] %>"><%= category.description %></span>
+          <% else
+            concat category.description
+          end
+        %>
+        
+        
         </td>
-        <td><%= link_to "Filho", addchild_admin_category_path(category) %></td>
-        <td><%= link_to 'Visualizar', category %></td>
+        <td><%= link_to "Subcategoria", addchild_admin_category_path(category) %></td>
+        <td><%= link_to 'Ver', category %></td>
+        <% if category.name != "#{QA::Application.config.main_category}" %>
         <td><%= link_to 'Editar', edit_admin_category_path(category) %></td>
         <td><%= link_to 'Apagar', admin_category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+        <td></td>
+        <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

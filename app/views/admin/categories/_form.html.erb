@@ -1,26 +1,27 @@
-<%= form_for([:admin, @category], html: { class: "custom" }) do |f| %>
+<%= form_for([:admin, @category], html: {}) do |f| %>
+  <% eh_pucrs = @category.name == "#{QA::Application.config.main_category}" %>
   <div class="row">
     <div class="large-6 columns" role="content">
       <%= f.label :name, "Categoria" %><br>
-      <%= f.text_field :name, autocomplete: true, autofocus: true %>
+      <%= f.text_field :name, autocomplete: true, autofocus: !eh_pucrs, disabled: eh_pucrs %>
     </div>
     <div class="large-6 columns">
       <%= f.label :parent_id, "Categoria Pai" %><br>
-      <%= f.collection_select :parent_id, Category.order(:name), :id, :name, include_blank: true %>
+      <%= f.collection_select :parent_id, Category.order(:name).where("id != #{@category.id}"), :id, :name, include_blank: false %>
     </div>
   </div>
 
   <div class="row">  
     <div class="large-12 columns">
       <%= f.label :description, "Descrição" %><br>
-      <%= f.text_area :description, autocomplete: true %>
+      <%= f.text_area :description, autocomplete: true, disabled: eh_pucrs %>
     </div>
   </div>
   
   <div class="row">
     <div class="large-12 columns">
       <% btnLbl = controller.action_name == "new" ? "Inserir" : "Atualizar" %>
-      <%= f.submit btnLbl, class: "small button" %>
+      <%= f.submit btnLbl, class: "small button", disabled: eh_pucrs %>
     </div>
   </div>
 <% end %>
