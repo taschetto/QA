@@ -7,7 +7,7 @@
     </div>
     <div class="large-6 columns">
       <%= f.label :parent_id, "Categoria Pai" %><br>
-      <%= f.collection_select :parent_id, Category.order(:name).where("id != #{@category.id}"), :id, :name, include_blank: false %>
+      <%= f.collection_select :parent_id, Category.order(:name).where(@category.id != nil ? "id != #{@category.id}" : ""), :id, :name, include_blank: false %>
     </div>
   </div>
 
