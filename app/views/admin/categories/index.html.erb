@@ -10,12 +10,11 @@
 <table>
   <thead>
     <tr>
-      <th width="10%">Nome</th>
-      <th width="50%">Descrição</th>
-      <th width="10%"></th>
-      <th width="10%"></th>
-      <th width="10%"></th>
-      <th width="10%"></th>
+      <th width="20%">Nome</th>
+      <th width="55%">Descrição</th>
+      <th width="5%"></th>
+      <th width="5%"></th>
+      <th width="5%"></th>
     </tr>
   </thead>
 
@@ -38,14 +37,11 @@
             concat category.description
           end
         %>
-        
-        
         </td>
-        <td><%= link_to "Subcategoria", addchild_admin_category_path(category) %></td>
-        <td><%= link_to 'Ver', category %></td>
+        <td><%= link_to tag("i", class: "fi-plus"), addchild_admin_category_path(category), class: 'icon', title: 'Adicionar Subcategoria' %></td>
         <% if category.name != "#{QA::Application.config.main_category}" %>
-        <td><%= link_to 'Editar', edit_admin_category_path(category) %></td>
-        <td><%= link_to 'Apagar', admin_category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to tag('i', class: 'fi-page-edit'), edit_admin_category_path(category), class: 'icon', title: 'Editar Categoria' %></td>
+        <td><%= link_to tag("i", class: "fi-trash"), admin_category_path(category), method: :delete, class: 'icon', title: 'Apagar Categoria' %></td>
         <% else %>
         <td></td>
         <td></td>

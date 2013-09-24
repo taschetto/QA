@@ -21,4 +21,5 @@
 
 <% if user_signed_in? && current_user.user_level > 0 %>
   <%= link_to 'Editar Categoria', edit_admin_category_path(@category), class: "small button" %>
+  <%= link_to 'Adicionar Subcategoria', addchild_admin_category_path(@category), class: "small button" %>
 <% end %>

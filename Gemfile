@@ -37,6 +37,10 @@ gem 'devise'
 gem 'zurb-foundation'
 gem 'ancestry'
 
+group :assets do
+  gem 'foundation-icons-sass-rails'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
