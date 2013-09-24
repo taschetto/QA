@@ -1,11 +1,12 @@
-  <li><%= link_to 'Home', "/", class: className %></li>
+  <li><%= link_to raw(content_tag('span', '', class: 'icon fi-home') << ' Home'), "/", class: className %></li>
 <% if user_signed_in? %>
-  <li><%= link_to 'Editar perfil', edit_user_registration_path, class: className %></li>
+  <li><%= link_to raw(content_tag('span', '', class: 'icon fi-torso') << ' Editar Perfil'), edit_user_registration_path, class: className %></li>
   <% if current_user.user_level > 0 %>
-    <li><%= link_to "Painel", admin_dashboard_path, class: className %></li>
+    <li>
+      <%= link_to raw(content_tag('span', '', class: 'icon fi-wrench') << ' Painel'), admin_dashboard_path, class: className %></li>
   <% end %>
-  <li><%= link_to "Sair", destroy_user_session_path, method: :delete, class: className %></li>
+  <li><%= link_to raw(content_tag('span', '', class: 'icon fi-power') << ' Sair'), destroy_user_session_path, method: :delete, class: className %></li>
 <% else %>
-  <li><%= link_to "Entrar", new_user_session_path, class: className %></li>
-  <li><%= link_to "Criar conta", new_user_registration_path, class: className %></li>
+  <li><%= link_to raw(content_tag('span', '', class: 'icon fi-torso') << ' Entrar'), new_user_session_path, class: className %></li>
+  <li><%= link_to raw(content_tag('span', '', class: 'icon fi-torsos-all') << ' Criar Conta'), new_user_registration_path, class: className %></li>
 <% end %>

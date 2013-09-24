@@ -1301,3 +1301,11 @@ $crumb-font-size: emCalc(13);
 // $topbar-sticky-class: ".sticky";
 
 @import 'foundation';
+
+a.icon {
+  font-size: emCalc(25);
+}
+
+a span.icon {
+  font-size: emCalc(20);
+}
