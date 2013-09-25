@@ -1,25 +1,33 @@
 <%- title "Admin - Categoria: #{@category.name}" %>
 <ul class="breadcrumbs">
-  <li><%= link_to "Home", "/" %></li>
+  <li><%= link_to "Raíz", admin_categories_path %></li>
 <% @category.ancestors.each do |category| %>
   <li><%= link_to category.name, category %></li>
 <% end %>
   <li class="current"><%= @category.name %></li>
 </ul>
+
+<h3><%= @category.name %>
+  <%= link_to content_tag('i', '', class: 'fi-page-edit'), edit_admin_category_path(@category), class: 'icon', title: 'Editar Categoria' %>
+  <%= link_to content_tag('i', '', class: 'fi-plus'), addchild_admin_category_path(@category), class: 'icon', title: 'Adicionar Subcategoria' %>
+  <%= link_to content_tag('i', '', class: 'fi-trash'), admin_category_path(@category), method: :delete, class: 'icon', title: 'Apagar Categoria' %>
+</h3>
 <p><%= @category.description %></p>
-<% if @category.has_children? %>
-<div class="panel">
-  <ul class="inline-list">
-  <% @category.children.each do |category| %>
-    <li><%= link_to category.name, category %></li>
-  <% end %>
-  </ul>
-</div>
-<% end %>
-<%
-  if user_signed_in?
-    if current_user.user_level > 0 %>
-      <%= link_to 'Editar Categoria', edit_category_path(@category), class: "small button" %><%
-    end
-  end
-%>
+
+<table>
+  <thead>
+    <tr>
+      <th width="20%">Nome</th>
+      <th width="50%">Descrição</th>
+      <th width="5%"></th>
+      <th width="5%"></th>
+      <th width="5%"></th>
+      <th width="5%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @category.children.each do |category| %>
+      <%= render 'cat', category: category %>
+    <% end %>    
+  </tbody>
+</table>
