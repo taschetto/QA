@@ -5,7 +5,11 @@ class Admin::CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @pucrs = Category.where("name = '#{QA::Application.config.main_category}'").first
+    if @pucrs == nil
+      @pucrs = Category.create!(name: "#{QA::Application.config.main_category}", description: "Pontifícia Universidade Católica do Rio Grande do Sul")
+    end    
+    redirect_to admin_category_path(@pucrs)
   end
 
   # GET /categories/1
@@ -29,7 +33,7 @@ class Admin::CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to admin_category_path(@category), notice: 'A categoria foi criada com sucesso.' }
+        format.html { redirect_to admin_category_path(@category.parent.nil? ? @category : @category.parent), notice: 'A categoria foi criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @category }
       else
         format.html { render action: 'new' }
@@ -55,10 +59,16 @@ class Admin::CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
+    @parent = @category.parent
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to admin_categories_path }
-      format.json { head :no_content }
+      if @parent.nil?
+        format.html { redirect_to admin_categories_path }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to admin_category_path(@parent), notice: 'A categoria foi removida com sucesso.' }
+        format.json { render action: 'show', location: @parent }        
+      end
     end
   end
 
