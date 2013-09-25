@@ -11,7 +11,8 @@
   <thead>
     <tr>
       <th width="20%">Nome</th>
-      <th width="55%">Descrição</th>
+      <th width="50%">Descrição</th>
+      <th width="5%"></th>
       <th width="5%"></th>
       <th width="5%"></th>
       <th width="5%"></th>
@@ -21,7 +22,6 @@
   <tbody>
     <% @categories.each do |category| %>
       <tr>
-        <td><%= link_to category.name, category %></td>
         <td>
         <%
           strAncestors = ""
@@ -32,12 +32,14 @@
             end
           end
           if strAncestors != "" %>
-            <span data-tooltip class="has-tip" title="<%= strAncestors[0...-3] %>"><%= category.description %></span>
+            <span data-tooltip class="has-tip" title="<%= strAncestors[0...-3] %>"><%= category.name %></span>
           <% else
-            concat category.description
+            concat category.name
           end
         %>
         </td>
+        <td><%= category.description %></td>
+        <td><%= link_to tag("i", class: "fi-magnifying-glass"), category, class: 'icon', title: 'Visualizar' %></td>
         <td><%= link_to tag("i", class: "fi-plus"), addchild_admin_category_path(category), class: 'icon', title: 'Adicionar Subcategoria' %></td>
         <% if category.name != "#{QA::Application.config.main_category}" %>
         <td><%= link_to tag('i', class: 'fi-page-edit'), edit_admin_category_path(category), class: 'icon', title: 'Editar Categoria' %></td>
@@ -51,6 +53,6 @@
   </tbody>
 </table>
 
-<br>
+<br />
 
 <%= link_to 'Nova Categoria', new_admin_category_path, class: "small button" %>

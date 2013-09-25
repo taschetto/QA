@@ -1,6 +1,5 @@
-<h3>Q&A PUCRS</h3>
-<p>Olá, <%= @email %>!</p>
+<h3>Olá, <%= @email %>!</h3>
 
-<p>Você pode confirmar sua conta através do link abaixo:</p>
+<p class="lead">Você pode confirmar sua conta através do link abaixo:</p>
 
-<p><%= link_to 'Confirmar minha conta', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<%= link_to 'Confirmar minha conta', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token), class: "btn" %>
