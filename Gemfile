@@ -36,6 +36,8 @@ gem 'pg'
 gem 'devise'
 gem 'zurb-foundation'
 gem 'ancestry'
+gem 'premailer'
+gem 'actionmailer_inline_css'
 
 group :assets do
   gem 'foundation-icons-sass-rails'
