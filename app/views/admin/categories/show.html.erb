@@ -1,8 +1,7 @@
 <%- title "Admin - Categoria: #{@category.name}" %>
 <ul class="breadcrumbs">
-  <li><%= link_to "Raíz", admin_categories_path %></li>
 <% @category.ancestors.each do |category| %>
-  <li><%= link_to category.name, category %></li>
+  <li><%= link_to category.name, admin_category_path(category) %></li>
 <% end %>
   <li class="current"><%= @category.name %></li>
 </ul>
