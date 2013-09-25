@@ -1,0 +1,28 @@
+    <tr>
+        <td>
+        <%
+          strAncestors = ""
+          if category.ancestors.any?
+            
+            category.ancestors.each do |category|
+              strAncestors += category.name + " / "
+            end
+          end
+          if strAncestors != "" %>
+            <span data-tooltip class="has-tip" title="<%= strAncestors[0...-3] %>"><%= category.name %></span>
+          <% else
+            concat category.name
+          end
+        %>
+        </td>
+        <td><%= category.description %></td>
+        <td><%= link_to content_tag("i", '', class: "fi-magnifying-glass"), admin_category_path(category), class: 'icon', title: 'Visualizar' %></td>
+        <td><%= link_to content_tag("i", '', class: "fi-plus"), addchild_admin_category_path(category), class: 'icon', title: 'Adicionar Subcategoria' %></td>
+        <% if category.name != "#{QA::Application.config.main_category}" %>
+        <td><%= link_to content_tag('i', '', class: 'fi-page-edit'), edit_admin_category_path(category), class: 'icon', title: 'Editar Categoria' %></td>
+        <td><%= link_to content_tag("i", '', class: "fi-trash"), admin_category_path(category), method: :delete, class: 'icon', title: 'Apagar Categoria' %></td>
+        <% else %>
+        <td></td>
+        <td></td>
+        <% end %>
+      </tr>
