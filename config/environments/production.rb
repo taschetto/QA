@@ -1,7 +1,7 @@
 QA::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.log_level = :debug
-  config.consider_all_requests_local = true
+  config.logger = Logger.new(STDOUT)
+  config.logger.level = Logger::DEBUG
 
   # Code is not reloaded between requests.
   config.cache_classes = true
