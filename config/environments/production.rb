@@ -91,5 +91,5 @@ QA::Application.configure do
     password: "gmptsistemas"
   }  
 
-  config.action_mailer.default_url_options = { :host => 'https://qapucrs.herokuapp.com' }  
+  config.action_mailer.default_url_options = { host: "https://qapucrs.herokuapp.com" }
 end
