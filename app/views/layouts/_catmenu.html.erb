@@ -1,0 +1,17 @@
+<%
+  def menu(category)
+    c = category.has_children? ? "has-dropdown" : "" %>
+    <%= content_tag :li, class: c do %><%= link_to category.name, category %>
+      <% if category.has_children? %>
+        <%= content_tag :ul, class: "dropdown" do %>
+        <% category.children.each { |c| menu(c) }
+        end
+      end
+    end
+  end
+
+
+  @pucrs = Category.where("name = '#{QA::Application.config.main_category}'").first
+
+  menu(@pucrs) if !@pucrs.nil?
+%>

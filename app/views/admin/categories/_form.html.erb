@@ -1,4 +1,4 @@
-<%= form_for([:admin, @category], html: {}) do |f| %>
+<%= form_for([:admin, @category], html: { class: "custom" }) do |f| %>
   <% eh_pucrs = @category.name == "#{QA::Application.config.main_category}" %>
   <div class="row">
     <div class="large-6 columns" role="content">
@@ -7,7 +7,7 @@
     </div>
     <div class="large-6 columns">
       <%= f.label :parent_id, "Categoria Pai" %><br>
-      <%= f.collection_select :parent_id, Category.order(:name).where(@category.id != nil ? "id != #{@category.id}" : ""), :id, :name, include_blank: false %>
+      <%= f.collection_select :parent_id, Category.order(:name).where(@category.id != nil ? "id != #{@category.id}" : ""), :id, :name, include_blank: false, class: "small" %>
     </div>
   </div>
 
