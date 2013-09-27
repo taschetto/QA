@@ -8,7 +8,7 @@
             <%
               @pucrs = Category.where("name = '#{QA::Application.config.main_category}'").first
               if @pucrs != nil
-                Category.where("ancestry = '#{@pucrs.id}'").find_each do |category| %>
+                @pucrs.children.order("name ASC").each do |category| %>
                   <li><%= link_to category.name, category %></li>
                   <li class="divider"></li>
             <% end
