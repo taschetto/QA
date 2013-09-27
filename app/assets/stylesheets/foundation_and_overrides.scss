@@ -1314,3 +1314,12 @@ h3 a.icon
 {
   font-size: emCalc(15);
 }
+
+/* Main Item selector */
+.top-bar-section li a:hover {
+    color: #fff;
+    background-color: #2ba6cb;
+    -webkit-transition: background-color 300ms ease-out;
+    -moz-transition: background-color 300ms ease-out;
+    transition: background-color 300ms ease-out; }
+

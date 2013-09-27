@@ -27,6 +27,20 @@
         </div>
         <h1><%= link_to QA::Application.config.main_title, "/" %> <small><% if user_signed_in? %>Olá, <%= current_user.first_name %>!<% end %></small></h1>
         <hr />
+        <div class="top-bar">
+          <ul class="title-area">
+            <li class="name">
+              <h1><%= link_to "Categorias", "/" %></h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+          </ul>
+          <section class="top-bar-section">
+            <ul class="left">
+              <li class="divider hide-for-small"></li>
+              <%= render 'layouts/catmenu' %>
+            </ul>
+          </section>
+        </div>        
       </div>
     </div>
    
