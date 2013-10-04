@@ -1,0 +1,9 @@
+<%- title "Perfil de Usuário" %>
+
+<p><%= @user.first_name + " " + @user.last_name %></p>
+
+<%
+  search = Question.find_all_by_user_id(@user.id)
+  search.each do |question| %>
+    <%= link_to question.title, category_question_path(question.category_id, question) %><br />
+<% end %>
