@@ -1,23 +1,7 @@
 <%- title "Categorias" %>
-
-<ul class="breadcrumbs">
-  <li><%= link_to "Home", "/" %></li>
-<% @category.ancestors.each do |category| %>
-  <li><%= link_to category.name, category %></li>
-<% end %>
-  <li class="current"><%= @category.name %></li>
-</ul>
-
-<p><%= @category.description %></p>
-<% if @category.has_children? %>
-<div class="panel">
-  <ul class="inline-list">
-  <% @category.children.each do |category| %>
-    <li><%= link_to category.name, category %></li>
-  <% end %>
-  </ul>
-</div>
-<% end %>
-<% Question.all.each do |que| %>
+<%= render 'categories/breadcrumb', category: @category %>
+<h4><%= @category.description %></h4>
+<%= link_to 'Nova Pergunta', new_category_question_path(@category), class: "small button" %>
+<% Question.where("category_id = #{@category.id}").each do |que| %>
   <%= render 'question', question: que %>
 <% end %>

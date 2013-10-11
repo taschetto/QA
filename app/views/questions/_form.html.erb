@@ -1,0 +1,19 @@
+<%= form_for [@category, @question], html: { class: "custom" } do |f| %>
+  <div class="row">
+    <div class="large-12 columns" role="content">
+      <%= f.label :title, "Título" %><br>
+      <%= f.text_field :title, autocomplete: true, autofocus: true %>
+    </div>
+    <div class="large-12 columns" role="content">
+      <%= f.label :description, "Descrição" %><br>
+      <%= f.text_area :description, autofocus: false %>
+    </div>    
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <% btnLbl = controller.action_name == "new" ? "Inserir" : "Atualizar" %>
+      <%= f.submit btnLbl, class: "small button" %>
+    </div>
+  </div>
+<% end %>

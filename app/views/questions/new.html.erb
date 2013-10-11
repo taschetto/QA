@@ -1,0 +1,5 @@
+
+<%= render 'categories/breadcrumb', category: @category %>
+<h1>Nova Pergunta</h1>
+<%= render 'form' %>
+<%= link_to 'Voltar', category_path(@category), class: "small button" %>

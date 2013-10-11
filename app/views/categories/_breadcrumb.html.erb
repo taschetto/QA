@@ -1,0 +1,7 @@
+<ul class="breadcrumbs">
+  <li><%= link_to "Home", "/" %></li>
+<% category.ancestors.each do |subcat| %>
+  <li><%= link_to subcat.name, subcat %></li>
+<% end %>
+  <li><%= link_to category.name, category %></li>
+</ul>

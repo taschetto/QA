@@ -1,14 +1,34 @@
 <% @user = question.user_id.nil? ? nil : User.find(question.user_id) %>
-
 <article>
-  <h3><a href="#"><%= question.title %></a></h3>
-  <p><%= question.description %></p>
-  <% if !@user.nil? %>
-    <h6>Enviado por <%= link_to @user.first_name + " " + @user.last_name, @user -%>
-  <%else%>
-    <h6>Enviado por <i>Usuário Desconhecido</i>
-  <%end%>
-  em <%= question.created_at.strftime("%d/%m/%Y %H:%M:%S") %>.</h6>
+  <div class="row">
+    <div class="large-12  small-12 columns">
+      <h3><%= link_to question.title, category_question_path(question.category_id, question) %></h3>
+      <div class="comment">
+        <section class="top">
+          <h6 class="byline">
+            <% if !@user.nil? %>
+              <%= link_to raw("<i class=\"usericon\"></i> " + @user.first_name), @user -%>
+            <%else%>
+              <i class="usericon"></i>Usuário Desconhecido
+            <%end%>
+            <small>em 
+              <span class="data">
+                <%= question.created_at.strftime("%d/%m/%Y %H:%M:%S") %>
+              </span>
+            </small>
+          </h6>
+        </section>
+        <section class="content">
+          <p class="justify"><%= question.description %></p> 
+        </section>
+        <section class="actions">
+          <ul class="inline-list">
+            <li><a href="#">Gostei</a></li>
+            <li><a href="#">Responder</a></li>
+          </ul>
+        </section>
+      </div>      
+    </div>
+  </div>
 </article>
-
 <hr />
