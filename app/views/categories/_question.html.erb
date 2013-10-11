@@ -1,0 +1,14 @@
+<% @user = question.user_id.nil? ? nil : User.find(question.user_id) %>
+
+<article>
+  <h3><a href="#"><%= question.title %></a></h3>
+  <p><%= question.description %></p>
+  <% if !@user.nil? %>
+    <h6>Enviado por <%= link_to @user.first_name + " " + @user.last_name, @user -%>
+  <%else%>
+    <h6>Enviado por <i>Usuário Desconhecido</i>
+  <%end%>
+  em <%= question.created_at.strftime("%d/%m/%Y %H:%M:%S") %>.</h6>
+</article>
+
+<hr />

@@ -37,6 +37,7 @@ gem 'pg'
 gem 'devise'
 gem 'zurb-foundation'
 gem 'ancestry'
+gem 'newrelic_rpm'
 
 group :assets do
   gem 'foundation-icons-sass-rails'
