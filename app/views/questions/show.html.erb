@@ -1,5 +1,2 @@
 <%= render 'categories/breadcrumb', category: @category %>
 <%= render '/categories/question', question: @question %>
-
-<%= link_to 'Editar', edit_category_question_path(@question.category_id, @question), class: "small button" %>
-<%= link_to 'Voltar', category_path(@question.category_id), class: "small button" %>

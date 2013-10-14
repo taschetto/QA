@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  before_action :set_category
   before_action :set_question
   before_action :set_user
 
@@ -88,6 +89,10 @@ class AnswersController < ApplicationController
     def set_user
       @user = user_signed_in? ? User.find(current_user.id) : nil
     end            
+
+    def set_category
+      @category = Category.find(params[:category_id])
+    end    
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
