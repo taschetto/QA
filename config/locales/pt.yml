@@ -32,3 +32,5 @@ pt:
   user: "Usuário"
   question: "Pergunta"
   user_id: "Usuário"
+  title: "Título"
+  description: "Descrição"
