@@ -1,5 +1,5 @@
 <%
-  def question_error_messages!(resource)
+  def answer_error_messages!(resource)
     return "" if resource.errors.empty?
 
     sentence = I18n.t("errors.messages.not_saved",
@@ -18,15 +18,12 @@
     <%
   end
 %>
-<%= form_for [@category, @question], html: { class: "custom" } do |f| %>
+<%= form_for @answer, url: category_question_answer_path(params[:category_id], params[:question_id], @answer) do 
+  |f| %>
 <%
-question_error_messages!(@question)
-%>
+answer_error_messages!(@answer)
+%>  
   <div class="row">
-    <div class="large-12 columns" role="content">
-      <%= f.label :title, "Título" %><br>
-      <%= f.text_field :title, autocomplete: true, autofocus: true %>
-    </div>
     <div class="large-12 columns" role="content">
       <%= f.label :description, "Descrição" %><br>
       <%= f.text_area :description, autofocus: false %>

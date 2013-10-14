@@ -137,7 +137,7 @@ Devise.setup do |config|
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
-  config.email_regexp = /\b[A-Z0-9._%a-z\-]+#{QA::Application.config.email_postfix}/ # /\A[^@]+@[^@]+\z/
+  config.email_regexp = /\b[A-Z0-9._%a-z\-]+#{QA::Application.config.email_postfix}/
   #config.email_regexp = /\A[^@]+@[^@]+\z/
 
   # ==> Configuration for :timeoutable

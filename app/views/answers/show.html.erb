@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+
+<%= @answer.description %>
+
+<%= link_to 'Edit', edit_category_question_answer_path(params[:category_id], params[:question_id], @answer) %> |
+<%= link_to 'Back', category_question_path(params[:category_id], params[:question_id]) %>

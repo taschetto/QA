@@ -2,7 +2,9 @@ QA::Application.routes.draw do
   get "admin/dashboard"
   devise_for :users
   resources :categories, only: [:show] do
-    resources :questions, except: [:index]
+    resources :questions, except: [:index] do
+      resources :answers, except: [:index, :show ]
+    end
   end
   resources :users, only: [:show]
 

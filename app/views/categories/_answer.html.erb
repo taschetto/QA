@@ -1,0 +1,33 @@
+<% @user = answer.user_id.nil? ? nil : User.find(answer.user_id) %>
+      <div class="indented comment push">
+        <section class="top">
+          <h6 class="byline">
+            <% if !@user.nil? %>
+              <%= link_to raw("<i class=\"usericon\"></i> " + @user.first_name), @user -%>
+            <%else%>
+              <i class="usericon"></i>Usuário Desconhecido
+            <%end%>
+            <small>em 
+              <span class="data">
+                <%= answer.created_at.strftime("%d/%m/%Y %H:%M:%S") %>
+              </span>
+            </small>
+          </h6>
+        </section>
+        <section class="content">
+          <p class="justify"><%= answer.description %></p> 
+        </section>
+        <section class="actions">
+
+          <ul class="inline-list">
+            <li><a href="#">Gostei</a></li>
+            <%
+              question = Question.find(answer.question_id)
+              if user_signed_in? && (current_user.id == answer.user_id || current_user.user_level > 0) %>
+              <li><%= link_to "Editar", edit_category_question_answer_path(params[:category_id], answer.question_id, answer) %></li>
+              <li><%= link_to 'Apagar', category_question_answer_path(params[:category_id], answer.question_id, answer), method: :delete, data: { confirm: 'Tem certeza?' } %></li><%
+              end
+            %>
+          </ul>
+        </section>
+      </div>

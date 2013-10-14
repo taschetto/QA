@@ -1,9 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :set_category
-  before_action :set_create_user, only: [:create]
-
-  include Devise::Controllers::Helpers
+  before_action :set_user
 
   # GET /questions
   # GET /questions.json
@@ -34,7 +32,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to category_question_path(@question.category_id, @question), notice: 'Question was successfully created.' }
+        format.html { redirect_to category_question_path(@question.category_id, @question), notice: 'Pergunta criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @question }
       else
         format.html { render action: 'new' }
@@ -46,10 +44,18 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    if @user.user_level == 0 && @question.user_id != @user.id
+      @question.errors[:user_id] << "Você não pode editar perguntas de outros usuários."
+    end
     respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect_to category_question_path(@question.category_id, @question), notice: 'Question was successfully updated.' }
-        format.json { head :no_content }
+      if @question.errors.empty?
+        if @question.update(question_params)
+          format.html { redirect_to category_question_path(@question.category_id, @question), notice: 'Pergunta atualizada com sucesso.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @question.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render action: 'edit' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -60,9 +66,12 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
+    if @user.user_level == 0 && @question.user_id != @user.id
+      @question.errors[:user_id] << "Você não pode apagar perguntas de outros usuários."
+    end    
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url }
+      format.html { redirect_to category_path(params[:category_id])}
       format.json { head :no_content }
     end
   end
@@ -77,7 +86,7 @@ class QuestionsController < ApplicationController
       @category = Category.find(params[:category_id])
     end
 
-    def set_create_user
+    def set_user
       @user = user_signed_in? ? User.find(current_user.id) : nil
     end        
 
