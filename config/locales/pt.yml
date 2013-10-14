@@ -30,3 +30,5 @@ pt:
   password_confirmation: "Confirmação da senha"
   password: "Senha"
   user: "Usuário"
+  question: "Pergunta"
+  user_id: "Usuário"

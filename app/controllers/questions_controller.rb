@@ -1,6 +1,9 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :set_category
+  before_action :set_create_user, only: [:create]
+
+  include Devise::Controllers::Helpers
 
   # GET /questions
   # GET /questions.json
@@ -27,6 +30,7 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.category_id = @category.id
+    @question.user_id = @user.id unless @user.nil?
 
     respond_to do |format|
       if @question.save
@@ -71,10 +75,14 @@ class QuestionsController < ApplicationController
 
     def set_category
       @category = Category.find(params[:category_id])
-    end    
+    end
+
+    def set_create_user
+      @user = user_signed_in? ? User.find(current_user.id) : nil
+    end        
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:title, :description)
+      params.require(:question).permit(:title, :description, :category_id, :user_id)
     end
 end
