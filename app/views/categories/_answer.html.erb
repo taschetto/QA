@@ -19,7 +19,7 @@
         </section>
         <section class="actions">
           <ul class="inline-list">
-            <li><%= answer.likes > 0 ? answer.likes.to_s + " gostaram. " : "" %></li>
+            <li><%= answer.likes > 0 ? answer.likes.to_s + (answer.likes > 1 ? " gostaram." : " gostou.") : "" %></li>
         <% if user_signed_in?
           question = Question.find(answer.question_id) %>            
             <% likes = Like.where("user_id = #{current_user.id} and question_id = #{question.id} and answer_id = #{answer.id}").first
