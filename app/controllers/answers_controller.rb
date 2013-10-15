@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  before_action :set_answer2, only: [:like, :unlike]
   before_action :set_category
   before_action :set_question
   before_action :set_user
@@ -9,6 +10,50 @@ class AnswersController < ApplicationController
   def index
     @answers = Answer.all
   end
+
+  def like
+    likes = Like.where("user_id = #{@user.id} and question_id = #{@question.id}").first
+    if likes.nil?
+      @answer.likes = @answer.likes + 1
+      likes = Like.new
+      likes.user_id = @user.id
+      likes.question_id = @question.id
+      likes.answer_id = @answer.id
+    end
+    respond_to do |format|
+      if @answer.update(params.permit(:likes, :question_id, :user_id))
+        if likes.answer_id == @answer.id
+          likes.save
+          format.html { redirect_to category_question_path(params[:category_id], @answer.question_id) }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to category_question_path(params[:category_id], @answer.question_id), alert: "Você já gostou de uma resposta para esta pergunta." }
+          format.json { head :no_content }
+        end
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @answer.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def unlike
+    likes = Like.where("user_id = #{@user.id} and question_id = #{@question.id} and answer_id = #{@answer.id}").first
+    if !likes.nil?
+      @answer.likes = @answer.likes - 1
+      likes.destroy
+    end
+    respond_to do |format|
+      if @answer.update(params.permit(:likes, :question_id, :user_id))
+        likes.save unless likes.nil?
+        format.html { redirect_to category_question_path(params[:category_id], @answer.question_id) }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @answer.errors, status: :unprocessable_entity }
+      end
+    end
+  end  
 
   # GET /answers/1
   # GET /answers/1.json
@@ -81,6 +126,10 @@ class AnswersController < ApplicationController
     def set_answer
       @answer = Answer.find(params[:id])
     end
+
+    def set_answer2
+      @answer = Answer.find(params[:answer_id])
+    end    
 
     def set_question
       @question = Question.find(params[:question_id])

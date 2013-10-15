@@ -23,10 +23,9 @@
         </section>
         <section class="actions">
           <ul class="inline-list">
-            <li><a href="#">Gostei</a></li>
             <li><%= link_to "Responder", new_category_question_answer_path(question.category_id, question) %></li>
             <%
-              if user_signed_in? && (current_user.id == question.user_id || current_user.user_level > 0) %>
+              if current_user.id == question.user_id || current_user.user_level > 0 %>
               <li><%= link_to "Editar", edit_category_question_path(question.category_id, question) %></li>
               <li><%= link_to 'Apagar', category_question_path(question.category_id, question), method: :delete, data: { confirm: 'Tem certeza?' } %></li><%
               end
@@ -35,7 +34,7 @@
         </section>
       </div>
       <h4>Respostas</h4>
-      <% Answer.where("question_id = #{question.id}").order("likes DESC").order("created_at DESC").each do |ans| %>
+      <% Answer.where("question_id = #{question.id}").order("likes DESC").each do |ans| %>
         <%= render '/categories/answer', answer: ans %>
       <% end %>
     </div>

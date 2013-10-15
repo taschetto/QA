@@ -18,16 +18,24 @@
           <p class="justify"><%= answer.description %></p> 
         </section>
         <section class="actions">
-
           <ul class="inline-list">
-            <li><a href="#">Gostei</a></li>
+            <li><%= answer.likes > 0 ? answer.likes.to_s + " gostaram. " : "" %></li>
+        <% if user_signed_in?
+          question = Question.find(answer.question_id) %>            
+            <% likes = Like.where("user_id = #{current_user.id} and question_id = #{question.id} and answer_id = #{answer.id}").first
+              if likes.nil? %>
+            <li><%= link_to "Gostei", category_question_answer_like_path(question.category_id, question.id, answer.id) %></li>
+            <% else %>
+            <li><%= link_to "Gostei (desfazer)", category_question_answer_unlike_path(question.category_id, question.id, answer.id) %></li>
+            <% end %>
             <%
-              question = Question.find(answer.question_id)
-              if user_signed_in? && (current_user.id == answer.user_id || current_user.user_level > 0) %>
+              if current_user.id == answer.user_id || current_user.user_level > 0 %>
               <li><%= link_to "Editar", edit_category_question_answer_path(question.category_id, answer.question_id, answer) %></li>
-              <li><%= link_to 'Apagar', category_question_answer_path(params[:category_id], answer.question_id, answer), method: :delete, data: { confirm: 'Tem certeza?' } %></li><%
+              <li><%= link_to 'Apagar', category_question_answer_path(question.category_id, answer.question_id, answer), method: :delete, data: { confirm: 'Tem certeza?' } %></li><%
               end
             %>
+            <% end %>
           </ul>
         </section>
+        
       </div>

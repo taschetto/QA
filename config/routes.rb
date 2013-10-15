@@ -3,7 +3,10 @@ QA::Application.routes.draw do
   devise_for :users
   resources :categories, only: [:show] do
     resources :questions, except: [:index] do
-      resources :answers, except: [:index, :show ]
+      resources :answers, except: [:index, :show ] do
+        get 'like'
+        get 'unlike'
+      end
     end
   end
   resources :users, only: [:show]

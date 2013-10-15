@@ -6,6 +6,6 @@ class Answer < ActiveRecord::Base
  
   def valid_answer
     errors[:user_id] << "Você deve estar logado para realizar esta operação." if user_id.nil?
-    errors[:description] << "inválida." if description.empty?
+    errors[:description] << "inválida." if description.nil? || description.empty?
   end    
 end
