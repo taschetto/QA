@@ -1,0 +1,37 @@
+<%
+  def foirespondida(q)
+    c = Answer.where("question_id = #{q.id}").count
+    if c > 0
+      " (#{c} respostas)"
+    else
+      " (sem respostas)"
+    end
+  end
+%>
+<% @user = question.user_id.nil? ? nil : User.find(question.user_id) %>
+<article>
+  <div class="row">
+    <div class="large-8  small-8 columns">
+      <h3><%= link_to question.title, category_question_path(question.category_id, question) %><%= foirespondida(question) %></h3>
+    </div>
+    <div class="large-4 small-4 columns">
+      <div class="comment">
+        <section class="top">
+          <h6 class="byline">
+            <% if !@user.nil? %>
+              <%= link_to raw("<i class=\"usericon\"></i> " + @user.first_name), @user -%>
+            <%else%>
+              <i class="usericon"></i>Usuário Desconhecido
+            <%end%>
+            <small>em 
+              <span class="data">
+                <%= question.created_at.strftime("%d/%m/%Y %H:%M:%S") %>
+              </span>
+            </small>
+          </h6>
+        </section>
+      </div>
+    </div>
+  </div>
+</article>
+<hr />
