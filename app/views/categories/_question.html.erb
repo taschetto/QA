@@ -21,6 +21,7 @@
         <section class="content">
           <p class="justify"><%= question.description %></p> 
         </section>
+        <% if user_signed_in? %>
         <section class="actions">
           <ul class="inline-list">
             <li><%= link_to "Responder", new_category_question_answer_path(question.category_id, question) %></li>
@@ -32,6 +33,7 @@
             %>
           </ul>
         </section>
+        <% end %>
       </div>
       <h4>Respostas</h4>
       <% Answer.where("question_id = #{question.id}").order("likes DESC").each do |ans| %>
