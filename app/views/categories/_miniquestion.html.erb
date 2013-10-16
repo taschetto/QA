@@ -1,10 +1,12 @@
 <%
   def foirespondida(q)
     c = Answer.where("question_id = #{q.id}").count
-    if c > 0
-      " (#{c} respostas)"
-    else
+    if c <= 0
       " (sem respostas)"
+    elsif c == 1
+      " (#{c} resposta)"
+    else
+      " (#{c} respostas)"      
     end
   end
 %>
@@ -12,7 +14,7 @@
 <article>
   <div class="row">
     <div class="large-8  small-8 columns">
-      <h3><%= link_to question.title, category_question_path(question.category_id, question) %><%= foirespondida(question) %></h3>
+      <h4><%= link_to question.title, category_question_path(question.category_id, question) %></h4><span><%= foirespondida(question) %></span>
     </div>
     <div class="large-4 small-4 columns">
       <div class="comment">

@@ -1,3 +1,21 @@
+<%
+def getlikes(a)
+  ret = ""
+  Like.where("answer_id = #{a.id}").each do |like|
+    u = User.find(like.user_id)
+    
+    ret += (ret == "" ? "" : ", ") + u.first_name + " " + u.last_name
+  end
+  ret
+end
+def monta_likes(a)
+  if a.likes > 0
+    raw("<span data-tooltip class=\"has-tip\" title=\"" + getlikes(a) + "\">" + a.likes.to_s + (a.likes > 1 ? " gostaram." : " gostou.") + "</span>")
+  else
+    ""
+  end
+end
+%>
 <% @user = answer.user_id.nil? ? nil : User.find(answer.user_id) %>
       <div class="indented comment push">
         <section class="top">
@@ -19,7 +37,7 @@
         </section>
         <section class="actions">
           <ul class="inline-list">
-            <li><%= answer.likes > 0 ? answer.likes.to_s + (answer.likes > 1 ? " gostaram." : " gostou.") : "" %></li>
+            <li><%= monta_likes(answer) %></li>
         <% if user_signed_in?
           question = Question.find(answer.question_id) %>            
             <% likes = Like.where("user_id = #{current_user.id} and question_id = #{question.id} and answer_id = #{answer.id}").first
