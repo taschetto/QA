@@ -1,0 +1,35 @@
+<h1>Usuários</h1>
+
+<form method="get">
+  <input type="text" name="search" value="<%= params[:search] %>"/>
+  <input type="submit" value="Pesquisar Usuário" class="small button"/>
+</form>
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="25%">Nome</th>
+      <th width="25%">Sobrenome</th>
+      <th width="35%">E-mail</th>
+      <th width="5%"></th>
+      <th width="5%"></th>
+      <th width="5%"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_users.each do |admin_user| %>
+      <tr>
+        <td><%= admin_user.first_name %></td>
+        <td><%= admin_user.last_name %></td>
+        <td><%= admin_user.email %></td>
+        <td><%= link_to content_tag("i", '', class: "fi-magnifying-glass"), admin_user, class: 'icon', title: 'Visualizar' %></td>
+        <td><%= link_to content_tag('i', '', class: 'fi-page-edit'), edit_admin_user_path(admin_user), class: 'icon', title: 'Editar Usuário' %></td>
+        <td><% if admin_user.user_level == 0 %><%= link_to content_tag('i', '', class: 'fi-trash'), admin_user_path(admin_user), method: :delete, class: 'icon', title: 'Apagar Usuário', confirm: "Tem certeza?" %><% end %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  

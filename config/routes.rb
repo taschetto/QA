@@ -14,6 +14,7 @@ QA::Application.routes.draw do
   root :to => "home#index"
 
   namespace :admin do
+    resources :users, except: [:new, :create, :show]
     resources :categories do
       member do
         get 'addchild'
