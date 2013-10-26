@@ -30,7 +30,7 @@
         <div class="top-bar">
           <ul class="title-area">
             <li class="name">
-              <h1><%= link_to "Categorias", "/" %></h1>
+              <h1><%= link_to "Home", "/" %></h1>
             </li>
             <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
           </ul>
@@ -41,13 +41,13 @@
             </ul>
             <ul class="right">
               <li class="has-form">
-                <form>
+                <form method="get">
                   <div class="row collapse">
                     <div class="small-8 columns">
-                      <input type="text">
+                      <input type="text" name="search" value="<%= params[:search] %>" />
                     </div>
                     <div class="small-4 columns">
-                      <a href="#" class="button">Pesquisar</a>
+                      <input class="button" type="submit" value="Pesquisar" />
                     </div>
                   </div>
                 </form>

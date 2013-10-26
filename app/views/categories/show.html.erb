@@ -3,6 +3,12 @@
 <h4><%= @category.description %></h4>
 <%= link_to 'Nova Pergunta', new_category_question_path(@category), class: "small button" %>
 <hr />
-<% Question.where("category_id = #{@category.id}").order("created_at").each do |que| %>
+<%
+  strWhere = "category_id = #{@category.id}"
+  search = params[:search]
+  if !search.nil? && !search.empty?
+    strWhere += " and (title ilike '%#{search}%' or description ilike '%#{search}%')"
+  end
+  Question.where(strWhere).order("created_at").each do |que| %>
   <%= render 'miniquestion', question: que %>
 <% end %>
