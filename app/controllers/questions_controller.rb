@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question2, only: [:fix]
   before_action :set_category
   before_action :set_user
 
@@ -39,6 +40,28 @@ class QuestionsController < ApplicationController
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def fix
+    if @user.user_level == 0
+      @question.errors[:user_id] << "Você não pode fixar/desafixar perguntas."
+    end
+    respond_to do |format|
+      if @question.errors.empty?
+        @question.fixed = !@question.fixed
+        if @question.update(params.permit(:fixed))
+          format.html { redirect_to category_path(@question.category_id), notice: 'Pergunta fixada com sucesso.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @question.errors, status: :unprocessable_entity }
+        end
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+      end
+    end    
+
   end
 
   # PATCH/PUT /questions/1
@@ -82,6 +105,10 @@ class QuestionsController < ApplicationController
       @question = Question.find(params[:id])
     end
 
+    def set_question2
+      @question = Question.find(params[:question_id])
+    end
+
     def set_category
       @category = Category.find(params[:category_id])
     end
@@ -92,6 +119,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:title, :description, :category_id, :user_id)
+      params.require(:question).permit(:title, :description, :category_id, :user_id, :fixed)
     end
 end

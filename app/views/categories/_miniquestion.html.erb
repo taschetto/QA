@@ -14,7 +14,10 @@
 <article>
   <div class="row">
     <div class="large-8  small-8 columns">
-      <h4><%= link_to question.title, category_question_path(question.category_id, question) %></h4><span><%= foirespondida(question) %></span>
+    <h4><% if question.fixed %>
+      <%= raw(content_tag('i', '', class: 'icon fi-star')) %>
+    <% end %>
+      <%= link_to question.title, category_question_path(question.category_id, question) %></h4><span><%= foirespondida(question) %></span>
     </div>
     <div class="large-4 small-4 columns">
       <div class="comment">

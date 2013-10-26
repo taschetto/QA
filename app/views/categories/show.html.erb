@@ -9,6 +9,6 @@
   if !search.nil? && !search.empty?
     strWhere += " and (title ilike '%#{search}%' or description ilike '%#{search}%')"
   end
-  Question.where(strWhere).order("created_at").each do |que| %>
+  Question.where(strWhere).order("(case when fixed then 1 else 2 end) ASC, created_at DESC").each do |que| %>
   <%= render 'miniquestion', question: que %>
 <% end %>

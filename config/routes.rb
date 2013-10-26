@@ -3,6 +3,7 @@ QA::Application.routes.draw do
   devise_for :users
   resources :categories, only: [:show] do
     resources :questions, except: [:index] do
+      get 'fix'
       resources :answers, except: [:index, :show ] do
         get 'like'
         get 'unlike'

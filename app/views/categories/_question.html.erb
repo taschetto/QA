@@ -2,7 +2,9 @@
 <article>
   <div class="row">
     <div class="large-12  small-12 columns">
-      <h3><%= link_to question.title, category_question_path(question.category_id, question) %></h3>
+      <h3><% if question.fixed %>
+      <%= raw(content_tag('i', '', class: 'icon fi-star')) %>
+    <% end %><%= link_to question.title, category_question_path(question.category_id, question) %></h3>
       <div class="comment">
         <section class="top">
           <h6 class="byline">
@@ -29,6 +31,11 @@
               if current_user.id == question.user_id || current_user.user_level > 0 %>
               <li><%= link_to "Editar", edit_category_question_path(question.category_id, question) %></li>
               <li><%= link_to 'Apagar', category_question_path(question.category_id, question), method: :delete, data: { confirm: 'Tem certeza?' } %></li><%
+                if current_user.user_level > 0
+                  lbl = question.fixed ? "Desafixar" : "Fixar"%>
+                  <li><%= link_to lbl, category_question_fix_path(question.category_id, question) %></li>
+                <% end
+
               end
             %>
           </ul>
