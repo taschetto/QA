@@ -6,9 +6,31 @@
 <%
   strWhere = "category_id = #{@category.id}"
   search = params[:search]
+  order = params[:order]
+  onlyUnanswered = params[:un] == "true"
+  ord = "(case when fixed then 1 else 2 end) ASC, created_at"
+
+  if !order.nil?
+    if order == "ASC"
+      ord += " ASC"
+    else
+      ord += " DESC"
+    end
+  end
+
   if !search.nil? && !search.empty?
     strWhere += " and (title ilike '%#{search}%' or description ilike '%#{search}%')"
   end
-  Question.where(strWhere).order("(case when fixed then 1 else 2 end) ASC, created_at DESC").each do |que| %>
+  %>
+  <div class="large-12 columns">
+    <ul class="inline-list right">
+      <li>Filtros</li>
+      <li> <%= link_to raw(onlyUnanswered ? "Perguntas: Todas" : "Perguntas: Somente não respondidas"), request.parameters.merge(un: !onlyUnanswered, order: order) %></li>
+      <li><%= link_to raw(order == "ASC" ? "Ordem: Novas primeiro" : "Ordem: Antigas primeiro"), request.parameters.merge(un: onlyUnanswered, order: order == "ASC" ? "DESC" : "ASC") %></li>      
+    </ul>
+  </div>
+  <%
+  Question.where(strWhere).order(ord).each do |que|
+  next if onlyUnanswered && Answer.where("question_id = #{que.id}").size > 0 %>
   <%= render 'miniquestion', question: que %>
 <% end %>
