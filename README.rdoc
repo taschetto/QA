@@ -1,4 +1,5 @@
 = Q&A PUCRS
+=== Um contato inicial com a linguagem Ruby e o framework MVC Ruby on Rails.
 
 Este repositório armazena o Q&A PUCRS, um projeto experimental e de baixa complexidade. O Q&A serve/serviu como tema para o trabalho prático da disciplina de Gerência de Projetos de Software (Faculdade de Informática da PUCRS, semestre 2013/2).
 
